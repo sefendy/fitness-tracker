@@ -1,3 +1,13 @@
-<p>
-  login works!
-</p>
+<section class="signin-form">
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput type="text" placeholder="E-Mail" formControlName="email">
+      <mat-error *ngIf="signInForm.get('email').hasError('required') && signInForm.get('email').touched">Email can't be empty.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" formControlName="password">
+      <mat-error *ngIf="signInForm.get('password').hasError('required') && signInForm.get('password').touched">Password can't be empty.</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" [disabled]="signInForm.invalid">Login</button>
+  </form>
+</section>
