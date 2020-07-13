@@ -1,21 +1,41 @@
+import { AngularFirestore } from 'angularfire2/firestore';
 import { Subject } from 'rxjs/Subject';
 import { Exercise } from './exercise.model';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 
+@Injectable()
 export class TrainingService {
   exerciseChanged = new Subject<Exercise>();
-  private availableExercises: Exercise[] = [
-    { id: 'crunches', name: 'Crunches', duration: 30, calories: 8 },
-    { id: 'touch-toes', name: 'Touch Toes', duration: 180, calories: 15 },
-    { id: 'side-lunges', name: 'Side Lunges', duration: 120, calories: 18 },
-    { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
-  ];
+  exercisesChanged = new Subject<Exercise[]>();
+  private availableExercises: Exercise[] = [];
 
   private runningExercise: Exercise;
   private exercises: Exercise[] = [];
 
-  getAvailableExercises() {
-    return this.availableExercises.slice();
+  constructor(private db: AngularFirestore) {}
+
+  fetchAvailableExercises() {
+    this.db.collection('availableExercises')
+      .snapshotChanges()
+      .pipe(map(docArray => {
+        return docArray.map(doc => {
+          return {
+            id: doc.payload.doc.id,
+            // tslint:disable-next-line: no-string-literal
+            name: doc.payload.doc.data()['name'],
+            // tslint:disable-next-line: no-string-literal
+            duration: doc.payload.doc.data()['duration'],
+            // tslint:disable-next-line: no-string-literal
+            calories: doc.payload.doc.data()['calories']
+          };
+        });
+      }))
+      .subscribe((exercises: Exercise[]) => {
+        this.availableExercises = exercises;
+        this.exercisesChanged.next([...this.availableExercises]);
+      });
   }
 
   startExercise(selectedId: string) {
