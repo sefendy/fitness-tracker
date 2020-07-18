@@ -1,3 +1,4 @@
+import { UIService } from './shared/ui.service';
 import { environment } from './../environments/environment';
 import { TrainingService } from './training/training.service';
 import { AuthService } from './auth/auth.service';
@@ -51,7 +52,7 @@ import { StopTrainingComponent } from './training/current-training/stop-training
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [AuthService, TrainingService],
+  providers: [AuthService, TrainingService, UIService],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent],
 })
