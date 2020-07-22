@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadingSubs = this.uiService.loadingStateChanged.subscribe(isLoading => {
       this.isLoading = isLoading;
-    })
+    });
     this.signInForm = new FormGroup({
       // tslint:disable-next-line: object-literal-key-quotes
       'email': new FormControl(null, Validators.required),
