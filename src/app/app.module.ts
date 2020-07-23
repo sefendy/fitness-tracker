@@ -11,7 +11,6 @@ import { NgModule } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -33,7 +32,6 @@ import { HeaderComponent } from './navigation/header/header.component';
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
     TrainingModule,
-    AngularFireAuthModule,
     AuthModule
   ],
   providers: [AuthService, TrainingService, UIService],
