@@ -1,3 +1,4 @@
+import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +12,8 @@ import { SignupComponent } from './signup/signup.component';
   imports: [
     ReactiveFormsModule,
     AngularFireAuthModule,
-    SharedModule
+    SharedModule,
+    AuthRoutingModule
   ]
 })
 export class AuthModule {}
