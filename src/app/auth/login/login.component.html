@@ -8,7 +8,7 @@
       <input matInput type="password" placeholder="Password" formControlName="password">
       <mat-error *ngIf="signInForm.get('password').hasError('required') && signInForm.get('password').touched">Password can't be empty.</mat-error>
     </mat-form-field>
-    <button *ngIf="!isLoading" type="submit" mat-raised-button color="primary" [disabled]="signInForm.invalid">Login</button>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="signInForm.invalid">Login</button>
+    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
   </form>
 </section>
