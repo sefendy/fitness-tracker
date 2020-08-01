@@ -38,6 +38,6 @@ export class SignupComponent implements OnInit/*, OnDestroy*/ {
   //   if (this.loadingSubs) {
   //     this.loadingSubs.unsubscribe();
   //   }
-  }
+  // }
 
 }
